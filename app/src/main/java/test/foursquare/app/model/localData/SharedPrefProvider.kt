@@ -14,7 +14,7 @@ class SharedPrefProvider {
             Context.MODE_PRIVATE
         )
 
-    fun setFirtArrival(isFirstArrival: Boolean) {
+    fun setFirstArrival(isFirstArrival: Boolean) {
         preference.edit().putBoolean(
             KEY_FIRST_ARRIVAL
             , isFirstArrival

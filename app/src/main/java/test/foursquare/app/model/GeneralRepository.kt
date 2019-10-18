@@ -20,7 +20,7 @@ class GeneralRepository private constructor(private val sharedPrefProvider: Shar
     }
 
     fun setFirstArrival(isFirstArrival: Boolean) {
-        sharedPrefProvider.setFirtArrival(isFirstArrival)
+        sharedPrefProvider.setFirstArrival(isFirstArrival)
     }
 
     fun isFirstArrival(): Boolean {
