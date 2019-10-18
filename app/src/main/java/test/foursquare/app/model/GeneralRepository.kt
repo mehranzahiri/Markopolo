@@ -6,18 +6,18 @@ import test.foursquare.app.model.localData.SharedPrefProvider
 like check update or save token ...
  **/
 
-class GeneralRepository private constructor(private val sharedPrefProvider: SharedPrefProvider) {
+class GeneralRepository (private val sharedPrefProvider: SharedPrefProvider) {
 
-    companion object {
-        @Volatile
-        private var instance: GeneralRepository? = null
-
-        fun getInstance(sharedPrefProvider: SharedPrefProvider) =
-            instance ?: synchronized(this) {
-                instance ?: GeneralRepository(sharedPrefProvider)
-                    .also { instance = it }
-            }
-    }
+//    companion object {
+//        @Volatile
+//        private var instance: GeneralRepository? = null
+//
+//        fun getInstance(sharedPrefProvider: SharedPrefProvider) =
+//            instance ?: synchronized(this) {
+//                instance ?: GeneralRepository(sharedPrefProvider)
+//                    .also { instance = it }
+//            }
+//    }
 
     fun setFirstArrival(isFirstArrival: Boolean) {
         sharedPrefProvider.setFirstArrival(isFirstArrival)
