@@ -8,17 +8,6 @@ like check update or save token ...
 
 class GeneralRepository (private val sharedPrefProvider: SharedPrefProvider) {
 
-//    companion object {
-//        @Volatile
-//        private var instance: GeneralRepository? = null
-//
-//        fun getInstance(sharedPrefProvider: SharedPrefProvider) =
-//            instance ?: synchronized(this) {
-//                instance ?: GeneralRepository(sharedPrefProvider)
-//                    .also { instance = it }
-//            }
-//    }
-
     fun setFirstArrival(isFirstArrival: Boolean) {
         sharedPrefProvider.setFirstArrival(isFirstArrival)
     }
@@ -26,4 +15,12 @@ class GeneralRepository (private val sharedPrefProvider: SharedPrefProvider) {
     fun isFirstArrival(): Boolean {
         return sharedPrefProvider.isFirstArrival()
     }
+
+//    todo check for update in next version
+//    fun checkVersion{...}
+
+//    todo save token in next version
+//    fun saveToken{...}
+
+
 }

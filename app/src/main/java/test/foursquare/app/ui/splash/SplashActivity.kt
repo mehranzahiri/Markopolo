@@ -5,36 +5,35 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_splash.*
 import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import test.foursquare.app.R
 import test.foursquare.app.ui.home.MainActivity
-import org.kodein.di.android.kodein
 
-class SplashActivity : AppCompatActivity() ,KodeinAware{
+class SplashActivity : AppCompatActivity(), KodeinAware {
 
     override val kodein by kodein()
-    private val factory:SplashViewModelFactory by instance()
+    private val factory: SplashViewModelFactory by instance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val viewModel=ViewModelProviders.of(this,factory).get(SplashViewModel::class.java)
-        viewModel.isFirstArrival()
-        Toast.makeText(this,viewModel.isFirstArrival().toString(),Toast.LENGTH_LONG).show()
+        val viewModel = ViewModelProviders.of(this, factory).get(SplashViewModel::class.java)
+        viewModel.setFirstArrivalIfFlase()
+
         loadGif(R.drawable.gif_splash)
         scaleAnimation(0f, 0f, 1f, 1f, 500, 300)
         lazyStartActivity(5000)
     }
 
 
-     fun scaleAnimation(
+    fun scaleAnimation(
         fromX: Float, fromY: Float, toX: Float, toY: Float
         , delay: Long, duration: Long
     ) {
@@ -64,7 +63,7 @@ class SplashActivity : AppCompatActivity() ,KodeinAware{
 
         Handler().postDelayed(
             {
-//                add noHistory property in manifest for finish activity
+                //                add noHistory property in manifest for finish activity
                 startActivity(Intent(this, MainActivity::class.java))
 
             }, delay
