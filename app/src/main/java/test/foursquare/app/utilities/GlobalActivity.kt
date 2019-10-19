@@ -15,6 +15,7 @@ import test.foursquare.app.model.localData.SharedPrefProvider
 import test.foursquare.app.model.remoteData.ApiClient
 import test.foursquare.app.model.remoteData.ApiInterface
 import test.foursquare.app.model.remoteData.Requests
+import test.foursquare.app.ui.home.HomeViewModelFactory
 import test.foursquare.app.ui.splash.SplashViewModelFactory
 
 class GlobalActivity : Application(), KodeinAware {
@@ -34,18 +35,21 @@ class GlobalActivity : Application(), KodeinAware {
     override val kodein = Kodein.lazy {
         import(androidXModule(this@GlobalActivity))
 
+//        utils
         bind() from singleton { SharedPrefProvider() }
 
+//        repositories
         bind() from singleton { GeneralRepository(instance()) }
+        bind() from singleton { VenueRepository(instance(), instance()) }
 
+//        factories
         bind() from provider { SplashViewModelFactory(instance()) }
+        bind() from provider { HomeViewModelFactory(instance()) }
 
+//        webservice
         bind() from singleton { ApiClient() }
-
         bind() from singleton { ApiInterface(instance()) }
-
         bind() from singleton { Requests(instance()) }
 
-        bind() from singleton { VenueRepository(instance(), instance()) }
     }
 }
