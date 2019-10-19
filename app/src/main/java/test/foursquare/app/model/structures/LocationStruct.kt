@@ -4,23 +4,23 @@ import com.google.gson.annotations.SerializedName
 
 data class LocationStruct(
     @SerializedName("address")
-    val address: String?,
+    val address: String,
     @SerializedName("lat")
-    val lat: Double?,
+    val lat: Double,
     @SerializedName("lng")
-    val lng: Double?,
+    val lng: Double,
     @SerializedName("distance")
-    val distance: Int?,
+    val distance: Int,
     @SerializedName("postalCode")
-    val postalCode: String?,
+    val postalCode: String,
     @SerializedName("cc")
-    val cc: String?,
+    val cc: String,
     @SerializedName("city")
-    val city: String?,
+    val city: String,
     @SerializedName("state")
-    val state: String?,
+    val state: String,
     @SerializedName("country")
-    val country: String?,
+    val country: String,
     @SerializedName("formattedAddress")
-    val formattedAddress: List<String>?
+    val formattedAddress: List<String>
 )

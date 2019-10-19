@@ -2,9 +2,9 @@ package test.foursquare.app.model.structures
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponsVenue(
+data class ResponseVenue(
     @SerializedName("response")
-    val venueDataStruct: VenueDataStruct
+    val venueDataStruct: VenueDataStruct?
 ) {
 
     data class VenueDataStruct(
@@ -14,6 +14,11 @@ data class ResponsVenue(
 
     data class VenueGroupStruct(
         @SerializedName("items")
-        val venueList: List<VenueStruct>
+        val venueList: List<VenueHolder>?
+    )
+
+    data class VenueHolder(
+        @SerializedName("venue")
+        val venue: VenueStruct?
     )
 }

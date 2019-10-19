@@ -1,12 +1,10 @@
 package test.foursquare.app.model.remoteData
 
-import android.widget.Toast
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import test.foursquare.app.utilities.Consts
-import test.foursquare.app.utilities.GlobalActivity
 import java.util.concurrent.TimeUnit
 
 class ApiClient {
@@ -14,11 +12,7 @@ class ApiClient {
     private fun checkStatusCode(code: Int): Boolean {
         when (code) {
             400 -> {
-                Toast.makeText(
-                    GlobalActivity.applicationContext(),
-                    "bad request",
-                    Toast.LENGTH_LONG
-                ).show()
+//                todo show bad request message
                 return false
             }
         }
@@ -43,7 +37,7 @@ class ApiClient {
                     )
                     .addQueryParameter(
                         Consts.VERSION_KEY
-                        , Consts.CLIENT_SECRET_VALUE
+                        , Consts.VERSION_VALUE
                     )
                     .build()
 
