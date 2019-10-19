@@ -2,7 +2,7 @@ package test.foursquare.app.model
 
 import test.foursquare.app.model.localData.SharedPrefProvider
 
-class AvenueRepository (private val sharedPrefProvider: SharedPrefProvider) {
+class VenueRepository (private val sharedPrefProvider: SharedPrefProvider) {
 
 //    todo  instead of here, use singelton in kodein-> global activity
 //    companion object {

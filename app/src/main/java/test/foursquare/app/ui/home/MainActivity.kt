@@ -1,7 +1,7 @@
 package test.foursquare.app.ui.home
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import test.foursquare.app.R
 
 class MainActivity : AppCompatActivity() {

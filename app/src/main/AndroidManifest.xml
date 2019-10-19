@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="test.foursquare.app">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".utilities.GlobalActivity"
         android:allowBackup="true"
@@ -13,16 +15,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.splash.SplashActivity"
-            android:noHistory="true">
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:noHistory="true"
+            android:theme="@style/AppThemeNoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.home.MainActivity">
-        </activity>
+        <activity
+            android:name=".ui.home.MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
