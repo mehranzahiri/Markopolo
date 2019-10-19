@@ -1,17 +1,13 @@
 package test.foursquare.app.model
 
 import test.foursquare.app.model.localData.SharedPrefProvider
+import test.foursquare.app.model.remoteData.Requests
 
-class VenueRepository (private val sharedPrefProvider: SharedPrefProvider) {
+class VenueRepository(private val sharedPrefProvider: SharedPrefProvider,
+    private val requests: Requests)
+{
 
-//    todo  instead of here, use singelton in kodein-> global activity
-//    companion object {
-//        @Volatile
-//        private var instance: AvenueRepository? = null
-//
-//        fun getInstance(sharedPrefProvider: SharedPrefProvider) =
-//            instance ?: synchronized(this) {
-//                instance ?: AvenueRepository(sharedPrefProvider).also { instance = it }
-//            }
-//    }
+    suspend fun exploreVenue(latLng: String, limit: Int, offset: Int) =
+        requests.fetchVenues(latLng, limit, offset)
+
 }
