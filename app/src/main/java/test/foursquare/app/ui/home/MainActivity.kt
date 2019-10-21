@@ -20,9 +20,5 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         val viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
 
-        viewModel.exploreVenue(
-            "48.8588377,2.2770195"
-            , 5, 1
-        )
     }
 }
