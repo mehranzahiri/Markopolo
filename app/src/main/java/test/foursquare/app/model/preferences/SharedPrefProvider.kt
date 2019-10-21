@@ -1,4 +1,4 @@
-package test.foursquare.app.model.localData
+package test.foursquare.app.model.preferences
 
 import android.content.Context
 import android.content.SharedPreferences

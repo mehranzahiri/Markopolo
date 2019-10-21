@@ -1,6 +1,6 @@
 package test.foursquare.app.model
 
-import test.foursquare.app.model.localData.SharedPrefProvider
+import test.foursquare.app.model.preferences.SharedPrefProvider
 import test.foursquare.app.model.remoteData.Requests
 
 class VenueRepository(private val sharedPrefProvider: SharedPrefProvider,

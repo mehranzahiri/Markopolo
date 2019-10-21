@@ -11,7 +11,7 @@ import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 import test.foursquare.app.model.GeneralRepository
 import test.foursquare.app.model.VenueRepository
-import test.foursquare.app.model.localData.SharedPrefProvider
+import test.foursquare.app.model.preferences.SharedPrefProvider
 import test.foursquare.app.model.remoteData.ApiClient
 import test.foursquare.app.model.remoteData.ApiInterface
 import test.foursquare.app.model.remoteData.Requests
