@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "215057106888",
+    "firebase_url": "https://markopolo-61f58.firebaseio.com",
+    "project_id": "markopolo-61f58",
+    "storage_bucket": "markopolo-61f58.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215057106888:android:ea691f3be829a36874a2fd",
+        "android_client_info": {
+          "package_name": "test.foursquare.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215057106888-b9114jvafla57amnng42qn2ns5m22drq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiq1-JbZl_swYyAsNCP6ERS5nrQuhzZ7o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215057106888-b9114jvafla57amnng42qn2ns5m22drq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

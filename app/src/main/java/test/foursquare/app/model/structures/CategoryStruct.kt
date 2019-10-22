@@ -1,18 +1,29 @@
 package test.foursquare.app.model.structures
 
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "categories")
 data class CategoryStruct(
+    @PrimaryKey(autoGenerate = true)
+    var id: Int,
     @SerializedName("id")
-    val id: String,
+    var category_id: String,
     @SerializedName("name")
-    val name: String,
+    var name: String,
+    var short_name: String,
     @SerializedName("pluralName")
-    val pluralName: String?,
+    var pluralName: String?,
     @SerializedName("shortName")
-    val shortName: String?,
-    @SerializedName("icon")
-    val icon: PhotoStruct?,
+    var shortName: String?,
     @SerializedName("primary")
-    val primary: Boolean?
-)
+    var primary: Boolean?,
+    var icon: String?,
+    @Ignore
+    @SerializedName("icon")
+    var photoStruct: PhotoStruct?
+){
+    constructor() : this(0,"","","","","",false,"",null)
+}

@@ -1,10 +1,10 @@
-package test.foursquare.app.model.db.entities
+package test.foursquare.app.model.structures
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
-data class VenueDetailEntity(
+@Entity(tableName = "venueDetails")
+data class VenueDetailStruct(
     @PrimaryKey(autoGenerate = true)
     val id:Int,
     val venue_id:String,

@@ -11,6 +11,7 @@ import org.kodein.di.generic.provider
 import org.kodein.di.generic.singleton
 import test.foursquare.app.model.GeneralRepository
 import test.foursquare.app.model.VenueRepository
+import test.foursquare.app.model.db.VenueDatabse
 import test.foursquare.app.model.preferences.SharedPrefProvider
 import test.foursquare.app.model.remoteData.ApiClient
 import test.foursquare.app.model.remoteData.ApiInterface
@@ -37,10 +38,11 @@ class GlobalActivity : Application(), KodeinAware {
 
 //        utils
         bind() from singleton { SharedPrefProvider() }
+        bind() from singleton { VenueDatabse(instance()) }
 
 //        repositories
         bind() from singleton { GeneralRepository(instance()) }
-        bind() from singleton { VenueRepository(instance(), instance()) }
+        bind() from singleton { VenueRepository(instance(), instance(),instance()) }
 
 //        factories
         bind() from provider { SplashViewModelFactory(instance()) }

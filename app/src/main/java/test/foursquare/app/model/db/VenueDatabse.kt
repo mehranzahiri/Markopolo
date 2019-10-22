@@ -4,12 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import test.foursquare.app.model.db.entities.CategoryEntity
-import test.foursquare.app.model.db.entities.VenueDetailEntity
-import test.foursquare.app.model.db.entities.VenueEntitiy
+import test.foursquare.app.model.structures.CategoryStruct
+import test.foursquare.app.model.structures.VenueDetailStruct
+import test.foursquare.app.model.structures.VenueStruct
 
 @Database(
-    entities = [VenueEntitiy::class, VenueDetailEntity::class, CategoryEntity::class],
+    entities = [VenueStruct::class, VenueDetailStruct::class, CategoryStruct::class],
     version = 1
 )
 abstract class VenueDatabse : RoomDatabase() {
@@ -33,7 +33,7 @@ abstract class VenueDatabse : RoomDatabase() {
             Room.databaseBuilder(
                 context.applicationContext,
                 VenueDatabse::class.java,
-                "Markopolo,db"
+                "Markopolo.db"
             ).build()
     }
 }
