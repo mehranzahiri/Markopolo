@@ -1,4 +1,4 @@
-package test.foursquare.app.utilities
+package test.foursquare.app.model.services
 
 import android.app.Service
 import android.content.Context
@@ -12,6 +12,8 @@ import com.google.android.gms.common.api.GoogleApiClient
 import com.google.android.gms.location.LocationRequest
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.MapsInitializer
+import test.foursquare.app.utilities.GlobalActivity
+import test.foursquare.app.utilities.PermissionController
 
 class LocationTracker : Service(), GoogleApiClient.ConnectionCallbacks,
     GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener {
@@ -47,7 +49,7 @@ class LocationTracker : Service(), GoogleApiClient.ConnectionCallbacks,
     }
 
     override fun onLocationChanged(p0: Location?) {
-
+        ilocationTracker!!.onUserLocationChanged(p0)
     }
 
     override fun onBind(p0: Intent?): IBinder? {
@@ -106,5 +108,15 @@ class LocationTracker : Service(), GoogleApiClient.ConnectionCallbacks,
 
 
         return START_STICKY
+    }
+
+
+
+    companion object{
+        private var ilocationTracker: IlocationTracker?=null
+
+        fun setLocationChageListener(ilocationTracker: IlocationTracker) {
+            this.ilocationTracker = ilocationTracker
+        }
     }
 }

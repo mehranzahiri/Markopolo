@@ -34,7 +34,7 @@
             android:name=".ui.home.MainActivity"
             android:screenOrientation="portrait" />
 
-        <service android:name=".utilities.LocationTracker" />
+        <service android:name=".model.services.LocationTracker" />
 
     </application>
 
