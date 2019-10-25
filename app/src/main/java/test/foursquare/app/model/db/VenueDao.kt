@@ -12,7 +12,7 @@ interface VenueDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveAllVenues(venueStruct: List<VenueStruct>)
 
-    @Query("SELECT * FROM venues")
-    fun getVenues(): LiveData<List<VenueStruct>>
+    @Query("SELECT venues.*,categories.* FROM venues LEFT JOIN categories ON venues.category_id=categories.cat_id")
+    fun joinVenuesOnCategory(): LiveData<List<VenueStruct>>
 
 }

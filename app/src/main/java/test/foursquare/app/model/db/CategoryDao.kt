@@ -1,6 +1,5 @@
 package test.foursquare.app.model.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,6 +12,6 @@ interface CategoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveAllCategories(categoryEntity: List<CategoryStruct>)
 
-    @Query("SELECT * FROM categories")
-    fun getCategories(): LiveData<List<CategoryStruct>>
+    @Query("SELECT * FROM categories WHERE cat_id==:id")
+    fun getCategoryById(id: String): CategoryStruct
 }

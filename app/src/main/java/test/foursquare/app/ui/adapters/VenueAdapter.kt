@@ -10,7 +10,10 @@ import kotlinx.android.synthetic.main.item_avenue.view.*
 import test.foursquare.app.R
 import test.foursquare.app.model.structures.VenueStruct
 
-class VenueAdapter(private val context: Context, private val venueList: ArrayList<VenueStruct>) :
+class VenueAdapter(
+    private val context: Context,
+    private val venueList: ArrayList<VenueStruct>
+) :
     RecyclerView.Adapter<VenueAdapter.HolderStruct>() {
 
     //    notify item remove by position
@@ -27,7 +30,7 @@ class VenueAdapter(private val context: Context, private val venueList: ArrayLis
     }
 
     //     notify multi item added by position
-    fun restoreItems(items: ArrayList<VenueStruct>, position: Int) {
+    fun restoreItems(items: List<VenueStruct>, position: Int) {
         venueList.addAll(position, items)
         notifyItemRangeInserted(position, position + items.size)
     }
@@ -51,10 +54,11 @@ class VenueAdapter(private val context: Context, private val venueList: ArrayLis
         fun bindData(venueStruct: VenueStruct) {
             itemView.txt_title.text = venueStruct.name
             itemView.txt_address.text = venueStruct.address
-            itemView.txt_title.text = venueStruct.categoryStruct?.get(0)?.shortName
-            itemView.txt_distance.text = venueStruct.locationStruct?.distance.toString()
+            itemView.txt_category.text = venueStruct.categoryStruct?.cat_name
+            itemView.txt_distance.text = venueStruct.distance.toString().plus(" meters")
             Glide.with(itemView.context)
-                .load(venueStruct.photo)
+                .load(venueStruct.categoryStruct?.icon)
+                .error(R.drawable.img_markopolo)
                 .thumbnail(Glide.with(itemView.context).load(R.drawable.gif_placeholder))
                 .into(itemView.img_place)
         }

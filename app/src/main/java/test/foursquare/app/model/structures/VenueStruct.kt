@@ -1,29 +1,30 @@
 package test.foursquare.app.model.structures
 
+import androidx.room.Embedded
 import androidx.room.Entity
-import androidx.room.Ignore
+import androidx.room.ForeignKey
+import androidx.room.ForeignKey.CASCADE
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "venues")
+@Entity(
+    tableName = "venues", foreignKeys = [
+        ForeignKey(
+            entity = CategoryStruct::class,
+            parentColumns = ["cat_id"],
+            childColumns = ["category_id"],
+            onDelete = CASCADE
+        )]
+)
 data class VenueStruct(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int,
-    var venue_detail_id: String,
-    @SerializedName("id")
-    var venue_id: String,
-    @SerializedName("name")
-    var name: String,
-    @Ignore
-    @SerializedName("location")
-    val locationStruct: LocationStruct?,
-    @Ignore
-    @SerializedName("categories")
-    val categoryStruct: List<CategoryStruct>?,
-    var category_id: String,
-    var photo: String,
-    var ll: String,
-    var address: String
-){
-    constructor() : this(1,"","","",null,null,"","","","")
-}
+    @PrimaryKey(autoGenerate = false)
+    val id: String,
+    val name: String,
+    val category_id: String?,
+    val photo: String?,
+    val lat: Double,
+    val lng: Double,
+    val address: String,
+    val distance: Int,
+    @Embedded
+    val categoryStruct: CategoryStruct?
+)
