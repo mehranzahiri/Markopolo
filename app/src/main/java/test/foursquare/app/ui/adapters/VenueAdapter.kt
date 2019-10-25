@@ -12,7 +12,7 @@ import test.foursquare.app.model.structures.VenueStruct
 
 class VenueAdapter(
     private val context: Context,
-    private val venueList: ArrayList<VenueStruct>
+    private var venueList: ArrayList<VenueStruct>
 ) :
     RecyclerView.Adapter<VenueAdapter.HolderStruct>() {
 
@@ -31,8 +31,9 @@ class VenueAdapter(
 
     //     notify multi item added by position
     fun restoreItems(items: List<VenueStruct>, position: Int) {
-        venueList.addAll(position, items)
-        notifyItemRangeInserted(position, position + items.size)
+        venueList.clear()
+        venueList.addAll(items)
+        notifyDataSetChanged()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderStruct {
@@ -55,7 +56,7 @@ class VenueAdapter(
             itemView.txt_title.text = venueStruct.name
             itemView.txt_address.text = venueStruct.address
             itemView.txt_category.text = venueStruct.categoryStruct?.cat_name
-            itemView.txt_distance.text = venueStruct.distance.toString().plus(" meters")
+            itemView.txt_distance.text = venueStruct.distance.toString().plus(" m")
             Glide.with(itemView.context)
                 .load(venueStruct.categoryStruct?.icon)
                 .error(R.drawable.img_markopolo)

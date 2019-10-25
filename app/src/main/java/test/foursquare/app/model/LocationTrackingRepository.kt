@@ -17,7 +17,6 @@ class LocationTrackingRepository : IlocationTracker {
         currentLocation.postValue(location)
     }
 
-
     fun startLocationTracker() {
         GlobalActivity.applicationContext()
             .startService(Intent(GlobalActivity.applicationContext(), LocationTracker::class.java))

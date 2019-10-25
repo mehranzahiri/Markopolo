@@ -31,24 +31,34 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
 
-        AdapterUtils.initialRecVertically(rec_venues, adapter, false)
-            .addEnterAnimation(rec_venues)
-            .addDecorate(
-                rec_venues,
-                RecyclerView.VERTICAL,
-                ContextCompat.getDrawable(this, R.drawable.shape_line)
-            )
+
 
         viewModel.fetchCurrentLocation().observe(this, Observer { location ->
 
             Coroutines.main {
-                viewModel.fetchCurrentLocation(location!!, LIMIT_FETCH, 0)
+                viewModel.fetchRecommendedVenue(location!!, LIMIT_FETCH, 0)
             }
 
         })
 
         viewModel.getVenueRecommendedList().observe(this, Observer { venueList ->
-            adapter.restoreItems(venueList, 0)
+            Coroutines.main {
+                if (rec_venues.adapter == null) {
+                    AdapterUtils.initialRecVertically(
+                        rec_venues,
+                        VenueAdapter(this, ArrayList(venueList)),
+                        false
+                    )
+                        .addDecorate(
+                            rec_venues,
+                            RecyclerView.VERTICAL,
+                            ContextCompat.getDrawable(this, R.drawable.shape_line)
+                        )
+                        .addEnterAnimation(rec_venues)
+                } else
+                    adapter.restoreItems(venueList, 0)
+            }
+
         })
 
     }

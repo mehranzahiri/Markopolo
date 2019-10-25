@@ -1,5 +1,6 @@
 package test.foursquare.app.model
 
+import android.location.Location
 import androidx.lifecycle.MutableLiveData
 import okhttp3.ResponseBody
 import org.json.JSONArray
@@ -36,16 +37,37 @@ class VenueRepository(
     }
 
     //    webservice
-    suspend fun fetchRecommendedVenue(latLng: String, limit: Int, offset: Int) {
+    suspend fun fetchRecommendedVenue(latLng: Location, limit: Int, offset: Int) {
 
-        if (isFetchNeeded())
-            parseVenueListFromResponse(requests.fetchVenues(latLng, limit, offset).body())
+        if (isFetchNeeded(latLng, Consts.VARIANCE_VALUE))
+            parseVenueListFromResponse(
+                requests.fetchVenues(
+                    locationToString(latLng),
+                    limit,
+                    offset
+                ).body()
+            )
 
     }
 
+    private fun locationToString(latLng: Location): String {
+        return latLng.latitude.toString() + "," + latLng.longitude.toString()
+    }
 
-    private fun isFetchNeeded(): Boolean {
-        return true
+    private fun isFetchNeeded(latLng: Location, radius: Float): Boolean {
+        if (latLng.distanceTo(sharedPrefProvider.getLastLocation()) > radius) {
+            saveLastLocation(latLng)
+            return true
+        }
+
+        return false
+    }
+
+    //    prefrences
+    private fun saveLastLocation(latLng: Location) {
+        Coroutines.io {
+            sharedPrefProvider.saveLastLocation(latLng)
+        }
     }
 
     //    db
@@ -69,19 +91,20 @@ class VenueRepository(
     fun getCategoryRecommendedList(id: String) =
         db.getCategoryDao().getCategoryById(id)
 
-    //      parser
+    /**    parser venue list **/
     private fun parseVenueListFromResponse(response: ResponseBody?) {
         val venueTempList: ArrayList<VenueStruct> = ArrayList()
         val categoryTempList: ArrayList<CategoryStruct> = ArrayList()
 
-        val items: JSONArray = JSONObject(response!!.string()).getJSONObject("response")
-            .getJSONArray("groups").getJSONObject(0).getJSONArray("items")
+        try {
+            val items: JSONArray = JSONObject(response!!.string()).getJSONObject("response")
+                .getJSONArray("groups").getJSONObject(0).getJSONArray("items")
 
-        for (i in 0 until items.length()) {
-            val venueItem: JSONObject = items.getJSONObject(i).getJSONObject("venue")
-            val categoryItem: JSONObject = venueItem.getJSONArray("categories").getJSONObject(0)
+            for (i in 0 until items.length()) {
+                val venueItem: JSONObject = items.getJSONObject(i).getJSONObject("venue")
+                val categoryItem: JSONObject = venueItem.getJSONArray("categories").getJSONObject(0)
 
-            try {
+
 
                 categoryTempList.add(
                     CategoryStruct(
@@ -111,11 +134,9 @@ class VenueRepository(
                 )
 
 
-            } catch (e: JSONException) {
-
             }
+        } catch (e: JSONException) {
         }
-
         categoryList.postValue(categoryTempList)
         venueEntityList.postValue(venueTempList)
     }

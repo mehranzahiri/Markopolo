@@ -21,7 +21,7 @@ class LocationTracker : Service(), GoogleApiClient.ConnectionCallbacks,
     private lateinit var mLocationManager: LocationManager
     private lateinit var mLocationRequest: LocationRequest
     private val UPDATE_INTERVAL: Long by lazy {
-        10 * 1000L
+        5 * 1000L
     }
 
     private val FASTEST_INTERVAL: Long by lazy {

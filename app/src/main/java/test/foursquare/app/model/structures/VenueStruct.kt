@@ -19,7 +19,7 @@ data class VenueStruct(
     @PrimaryKey(autoGenerate = false)
     val id: String,
     val name: String,
-    val category_id: String?,
+    val category_id: String,
     val photo: String?,
     val lat: Double,
     val lng: Double,

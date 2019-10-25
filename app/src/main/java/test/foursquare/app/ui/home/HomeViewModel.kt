@@ -10,17 +10,12 @@ class HomeViewModel(
     private val locationTrackingRepository: LocationTrackingRepository
 ) : ViewModel() {
 
-    suspend fun fetchCurrentLocation(latLng: Location, limit: Int, offset: Int) =
+    suspend fun fetchRecommendedVenue(latLng: Location, limit: Int, offset: Int) =
         venueRepository.fetchRecommendedVenue(
-            locationToString(latLng),
+            latLng,
             limit,
             offset
         )
-
-
-    fun locationToString(latLng: Location): String {
-        return latLng.latitude.toString() + "," + latLng.longitude.toString()
-    }
 
     fun getVenueRecommendedList() = venueRepository.getVenueRecommendedList()
 
