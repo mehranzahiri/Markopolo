@@ -1,6 +1,6 @@
 package test.foursquare.app.model
 
-import test.foursquare.app.model.localData.SharedPrefProvider
+import test.foursquare.app.model.preferences.SharedPrefProvider
 
 /** This repository provide any kind of information that related to app
 like check update or save token ...
