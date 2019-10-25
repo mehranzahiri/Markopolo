@@ -1,6 +1,7 @@
 package test.foursquare.app.ui.home
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -14,6 +15,7 @@ import test.foursquare.app.R
 import test.foursquare.app.ui.adapters.VenueAdapter
 import test.foursquare.app.utilities.AdapterUtils
 import test.foursquare.app.utilities.Coroutines
+import test.foursquare.app.utilities.GlobalActivity
 
 class MainActivity : AppCompatActivity(), KodeinAware {
 
@@ -21,9 +23,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     private val factory: HomeViewModelFactory by instance()
     private lateinit var viewModel: HomeViewModel
     private val LIMIT_FETCH = 50
-    private val adapter: VenueAdapter by lazy {
-        VenueAdapter(this, ArrayList())
-    }
+    private var adapter: VenueAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,28 +43,32 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         viewModel.getVenueRecommendedList().observe(this, Observer { venueList ->
             Coroutines.main {
-                if (rec_venues.adapter == null) {
+                    adapter = VenueAdapter(this, ArrayList(venueList))
                     AdapterUtils.initialRecVertically(
                         rec_venues,
-                        VenueAdapter(this, ArrayList(venueList)),
+                        adapter!!,
                         false
+                    ).addDecorate(
+                        rec_venues,
+                        RecyclerView.VERTICAL,
+                        ContextCompat.getDrawable(this, R.drawable.shape_line)
                     )
-                        .addDecorate(
-                            rec_venues,
-                            RecyclerView.VERTICAL,
-                            ContextCompat.getDrawable(this, R.drawable.shape_line)
-                        )
                         .addEnterAnimation(rec_venues)
-                } else
-                    adapter.restoreItems(venueList, 0)
+
             }
 
         })
+        viewModel.startTracker()
 
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopTracker()
+    }
+
+    override fun onResume() {
+        super.onResume()
         viewModel.startTracker()
     }
 

@@ -6,6 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layoutDirection="ltr"
     android:background="@color/colorPrimaryDark"
+    android:id="@+id/ly_venue"
     android:padding="16dp">
 
     <TextView

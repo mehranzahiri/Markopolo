@@ -21,11 +21,11 @@ class LocationTracker : Service(), GoogleApiClient.ConnectionCallbacks,
     private lateinit var mLocationManager: LocationManager
     private lateinit var mLocationRequest: LocationRequest
     private val UPDATE_INTERVAL: Long by lazy {
-        5 * 1000L
+        15 * 1000L
     }
 
     private val FASTEST_INTERVAL: Long by lazy {
-        5 * 1000L
+        15 * 1000L
     }
 
     override fun onConnected(p0: Bundle?) {
@@ -41,15 +41,14 @@ class LocationTracker : Service(), GoogleApiClient.ConnectionCallbacks,
     }
 
     override fun onConnectionSuspended(p0: Int) {
-        mGoogleApiClient.connect()
     }
 
     override fun onConnectionFailed(p0: ConnectionResult) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onLocationChanged(p0: Location?) {
-        ilocationTracker!!.onUserLocationChanged(p0)
+    override fun onLocationChanged(p0: Location) {
+        ilocationTracker?.onUserLocationChanged(p0)
     }
 
     override fun onBind(p0: Intent?): IBinder? {

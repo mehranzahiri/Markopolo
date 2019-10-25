@@ -12,4 +12,12 @@ class Requests(private val api: ApiInterface) {
         )
 
     }
+
+    suspend fun fetchVenueDetail(url: String): Response<ResponseBody> {
+
+        return api.getVenueDetial(
+            url
+        )
+
+    }
 }
