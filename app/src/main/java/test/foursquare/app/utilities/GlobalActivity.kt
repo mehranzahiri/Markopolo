@@ -17,9 +17,9 @@ import test.foursquare.app.model.preferences.SharedPrefProvider
 import test.foursquare.app.model.remoteData.ApiClient
 import test.foursquare.app.model.remoteData.ApiInterface
 import test.foursquare.app.model.remoteData.Requests
-import test.foursquare.app.model.services.LocationTracker
 import test.foursquare.app.ui.home.HomeViewModelFactory
 import test.foursquare.app.ui.splash.SplashViewModelFactory
+import test.foursquare.app.ui.venueDetail.VenueDetailViewModelFactory
 
 class GlobalActivity : Application(), KodeinAware {
 
@@ -49,7 +49,8 @@ class GlobalActivity : Application(), KodeinAware {
 
 //        factories
         bind() from provider { SplashViewModelFactory(instance()) }
-        bind() from provider { HomeViewModelFactory(instance(),instance()) }
+        bind() from provider { HomeViewModelFactory(instance(), instance()) }
+        bind() from provider { VenueDetailViewModelFactory(instance()) }
 
 //        webservice
         bind() from singleton { ApiClient() }

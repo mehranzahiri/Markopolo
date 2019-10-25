@@ -18,10 +18,14 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".ui.venueDetail.VenueDetailActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
             android:name=".ui.splash.SplashActivity"
             android:noHistory="true"
-            android:theme="@style/AppThemeNoActionBar"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppThemeNoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,7 +37,6 @@
             android:screenOrientation="portrait" />
 
         <service android:name=".model.services.LocationTracker" />
-
     </application>
 
 </manifest>
