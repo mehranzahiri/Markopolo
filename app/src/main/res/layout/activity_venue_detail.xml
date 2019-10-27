@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="venueDetailStruct"
+            type="test.foursquare.app.model.structures.VenueDetailStruct" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        app:cardBackgroundColor="@color/colorPrimaryDark"
+        tools:context=".ui.venueDetail.VenueDetailActivity">
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/ly_detail_venue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape_aval"
+            android:paddingLeft="8dp"
+            android:paddingTop="32dp">
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxWidth="350dp"
+                android:padding="8dp"
+                android:maxLines="3"
+                android:text="@={venueDetailStruct.venueStruct.name}"
+                android:textColor="@color/colorPrimary"
+                android:textSize="22sp"
+                android:gravity="left"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Fiddle Leaf FIG Topiary" />
+
+            <TextView
+                android:id="@+id/txt_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:gravity="left"
+                android:text="@={venueDetailStruct.venueStruct.categoryStruct.cat_name}"
+                android:textColor="@color/gray_light"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_name"
+                tools:text="10 Nursury pot" />
+
+            <TextView
+                android:id="@+id/txt_rating"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="2dp"
+                android:text='@={venueDetailStruct.rating+""}'
+                android:textSize="35sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_category"
+                tools:text="8.1" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="250dp"
+                android:layout_height="0dp"
+                android:adjustViewBounds="true"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="5dp"
+                android:layout_margin="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_rating">
+
+                <ImageView
+                    android:id="@+id/img_venue"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ly_detail_venue">
+
+            <TextView
+                android:id="@+id/txt_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                tools:text="Address: Planting"
+                android:text="@{`Address: `+venueDetailStruct.venueStruct.address}"
+                android:textColor="@color/transparent50_white"
+                android:textSize="12sp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textStyle="bold"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txt_hour"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="@={venueDetailStruct.hours}"
+                android:textColor="@color/transparent70_white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/txt_dislike"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txt_address" />
+
+            <TextView
+                android:id="@+id/txt_like"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="56dp"
+                android:background="@drawable/shape_round_corner"
+                android:drawableLeft="@drawable/ic_like"
+                android:gravity="center"
+                android:padding="4dp"
+                tools:text="42"
+                android:text="@={venueDetailStruct.like}"
+                android:textColor="@color/transparent70_white"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txt_dislike" />
+
+            <TextView
+                android:id="@+id/txt_dislike"
+                android:layout_width="110dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_round_corner"
+                android:drawableRight="@drawable/ic_dislike"
+                android:padding="4dp"
+                tools:text="19"
+                android:gravity="center"
+                android:text="@={venueDetailStruct.dislike}"
+                android:textColor="@color/transparent70_white"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txt_like"
+                app:layout_constraintHorizontal_bias="0.591"
+                app:layout_constraintStart_toStartOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/back"/>
+
+        <include layout="@layout/progress_view" />
+
+    </RelativeLayout>
+</layout>

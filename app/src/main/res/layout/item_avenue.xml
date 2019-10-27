@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layoutDirection="ltr"
+    android:background="@color/colorPrimaryDark"
+    android:id="@+id/ly_venue"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/txt_title"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        tools:text="Tristans"
+        android:paddingRight="8dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/img_place"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/ratebar_ranking"
+        style="@style/RatingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:numStars="5"
+        android:rating="3"
+        app:layout_constraintBottom_toTopOf="@+id/txt_address"
+        app:layout_constraintStart_toEndOf="@+id/img_place"
+        app:layout_constraintTop_toBottomOf="@+id/txt_title" />
+
+    <TextView
+        android:id="@+id/txt_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:padding="2dp"
+        tools:text="1215 Cheese St,Madison Wi"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/txt_category"
+        app:layout_constraintStart_toEndOf="@+id/img_place"
+        app:layout_constraintTop_toBottomOf="@+id/ratebar_ranking" />
+
+    <TextView
+        android:id="@+id/txt_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="1dp"
+        android:padding="2dp"
+        tools:text="Backery"
+        android:textColor="@color/transparent70_white"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/img_place"
+        app:layout_constraintTop_toBottomOf="@+id/txt_address" />
+
+    <ImageView
+        android:id="@+id/img_place"
+        android:layout_width="100dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="32dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="place image"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/ratebar_ranking"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txt_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:textColor="@color/transparent70_white"
+        app:layout_constraintBottom_toBottomOf="@+id/txt_title"
+        app:layout_constraintStart_toEndOf="@+id/txt_title"
+        app:layout_constraintTop_toTopOf="@+id/txt_title"
+        tools:text="1.3 meter " />
+</androidx.constraintlayout.widget.ConstraintLayout>
