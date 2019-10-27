@@ -1,7 +1,6 @@
 package test.foursquare.app.model
 
 import android.location.Location
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
@@ -237,9 +236,7 @@ class VenueRepository(
             venueDetailList.postValue(venueDetailTemp)
 
         } catch (e: JSONException) {
-            Log.i("ss", "JSONException " + e.message)
         } catch (e2: NullPointerException) {
-            Log.i("ss", "NullPointerException " + e2.message)
         }
 
     }
