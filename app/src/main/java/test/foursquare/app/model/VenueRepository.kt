@@ -2,7 +2,6 @@ package test.foursquare.app.model
 
 import android.location.Location
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.Dispatchers
@@ -20,7 +19,6 @@ import test.foursquare.app.model.structures.VenueDetailStruct
 import test.foursquare.app.model.structures.VenueStruct
 import test.foursquare.app.utilities.Consts
 import test.foursquare.app.utilities.Coroutines
-import test.foursquare.app.utilities.GlobalActivity
 
 class VenueRepository(
     private val sharedPrefProvider: SharedPrefProvider,
@@ -64,11 +62,12 @@ class VenueRepository(
 
     suspend fun fetchVenueDetail(id: String): LiveData<VenueDetailStruct> {
         return withContext(Dispatchers.IO) {
-            parseVenueDetailFromRespons(
+            parseVenueDetailFromResponse(
                 requests.fetchVenueDetail(
                     "venues/$id"
                 ).body()
             )
+
             getVenueDetailRecommendedList(id)
         }
 
@@ -81,7 +80,7 @@ class VenueRepository(
     }
 
     private fun isFetchNeeded(latLng: Location, radius: Float): Boolean {
-        Toast.makeText(GlobalActivity.applicationContext(),(latLng.distanceTo(sharedPrefProvider.getLastLocation()) > radius).toString(),Toast.LENGTH_LONG).show()
+
         if (latLng.distanceTo(sharedPrefProvider.getLastLocation()) > radius) {
             saveLastLocation(latLng)
             return true
@@ -180,30 +179,58 @@ class VenueRepository(
 
     }
 
-    private fun parseVenueDetailFromRespons(response: ResponseBody?) {
+    private fun parseVenueDetailFromResponse(response: ResponseBody?) {
         val venueDetailTemp: VenueDetailStruct?
         try {
             val item: JSONObject = JSONObject(response!!.string()).getJSONObject("response")
                 .getJSONObject("venue")
 
+            var hours = "No schedule for this Place."
+            var summary = "No summary"
+            var likes = "0"
+            var dislikes = "0"
+
+            if (item.has("hours") && item.getJSONObject("hours").get("status") != "")
+                hours = item.getJSONObject("hours").getString("status")
+
+            if (item.getJSONObject("reasons").has("items") && item.getJSONObject("reasons").getJSONArray(
+                    "items"
+                ).length() > 0
+            )
+                summary = item.getJSONObject("reasons").getJSONArray("items").getJSONObject(0)
+                    .getString("summary")
+
+            if (item.has("likes") && item.get("likes") is JSONObject)
+                likes = item.getJSONObject("likes").getString("count")
+
+            if (item.has("dislikes") && item.get("dislikes") is JSONObject)
+                dislikes = item.getJSONObject("dislikes").getString("count")
+
             venueDetailTemp =
                 VenueDetailStruct(
-                    0,
                     item.getString("id"),
-                    item.getJSONObject("bestPhoto").getString("suffix"),
-                    item.getJSONObject("hours").getString("status"),
-                    item.getJSONObject("reasons").getJSONArray("items").getJSONObject(0).getString("summary"),
-                    item.getJSONObject("likes").getString("count"),
-                    item.getJSONObject("dislikes").getString("count"),
+                    item.getJSONObject("bestPhoto").getString("prefix")
+                        .plus(
+                            Consts.PHOTO_DETAIL_SIZE_VALUE
+                        )
+                        .plus(
+                            item.getJSONObject("bestPhoto").getString("suffix")
+                        ),
+                    hours,
+                    summary,
+                    likes,
+                    dislikes,
                     item.getDouble("rating"),
-                    item.getString("ratingColor")
+                    item.getString("ratingColor"),
+                    null
                 )
-            Log.i("mmxx", venueDetailTemp.toString())
 
             venueDetailList.postValue(venueDetailTemp)
 
         } catch (e: JSONException) {
+            Log.i("ss", "JSONException " + e.message)
         } catch (e2: NullPointerException) {
+            Log.i("ss", "NullPointerException " + e2.message)
         }
 
     }

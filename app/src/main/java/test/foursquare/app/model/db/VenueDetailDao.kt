@@ -13,6 +13,6 @@ interface VenueDetailDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveVenueDetails(venueDetailEntity: VenueDetailStruct)
 
-    @Query("SELECT * FROM venueDetails WHERE id = :id")
+    @Query("SELECT * FROM venueDetails WHERE venue_id = :id")
     fun getVenueDetail(id: String): LiveData<VenueDetailStruct>
 }

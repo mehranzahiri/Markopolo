@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_avenue.view.*
 import test.foursquare.app.R
 import test.foursquare.app.model.structures.VenueStruct
@@ -14,11 +15,10 @@ import test.foursquare.app.ui.venueDetail.VenueDetailActivity
 import test.foursquare.app.utilities.Consts
 
 class VenueAdapter(
-    private val activity: Activity,
-    private var venueList: ArrayList<VenueStruct>
+    private val activity: Activity
 ) :
     RecyclerView.Adapter<VenueAdapter.HolderStruct>() {
-
+    private var venueList = ArrayList<VenueStruct>()
     //    notify item remove by position
     fun removeItem(position: Int) {
         venueList.removeAt(position)
@@ -34,10 +34,14 @@ class VenueAdapter(
 
     //     notify multi item added by position
     fun restoreItems(items: List<VenueStruct>, position: Int) {
-//        venueList.clear()
-        val siz=venueList.size
-        venueList.addAll(items)
-        notifyItemInserted(siz-1)
+
+        venueList.clear()
+        notifyDataSetChanged()
+
+        venueList.addAll(0, items)
+        notifyDataSetChanged()
+
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HolderStruct {
@@ -64,17 +68,16 @@ class VenueAdapter(
             itemView.txt_distance.text = venueStruct.distance.toString().plus(" m")
             Glide.with(itemView.context)
                 .load(venueStruct.categoryStruct?.icon)
-                .error(R.drawable.img_markopolo)
                 .thumbnail(Glide.with(itemView.context).load(R.drawable.gif_placeholder))
                 .into(itemView.img_place)
             itemView.ly_venue.setOnClickListener {
-                startDetailActivity(venueStruct.id)
+                startDetailActivity(venueStruct)
             }
         }
 
-        private fun startDetailActivity(id: String) {
-            val intent = Intent(activity,VenueDetailActivity::class.java).apply {
-                putExtra(Consts.VENUE_ID_KEY, id)
+        private fun startDetailActivity(venueStruct: VenueStruct) {
+            val intent = Intent(activity, VenueDetailActivity::class.java).apply {
+                putExtra(Consts.VENUE_SERIALIZE_KEY, Gson().toJson(venueStruct))
             }
             activity.startActivity(intent)
         }

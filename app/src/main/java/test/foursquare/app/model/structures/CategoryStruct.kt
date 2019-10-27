@@ -6,9 +6,9 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "categories")
 data class CategoryStruct(
     @PrimaryKey(autoGenerate = false)
-    val cat_id: String,
-    val cat_name: String,
-    val pluralName: String,
-    val short_name: String,
-    val icon: String
+    var cat_id: String,
+    var cat_name: String,
+    var pluralName: String,
+    var short_name: String,
+    var icon: String
 )

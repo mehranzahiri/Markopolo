@@ -6,16 +6,15 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "venueDetails")
 data class VenueDetailStruct(
-    @PrimaryKey(autoGenerate = true)
-    val detail_id: Int,
-    val venue_id: String,
-    val photo: String?,
-    val hours: String?,
-    val reasons: String,
-    val like: String,
-    val dislike: String?,
-    val rating: Double?,
-    val ratingColor: String?,
+    @PrimaryKey(autoGenerate = false)
+    var venue_id: String,
+    var photo: String?,
+    var hours: String?,
+    var reasons: String?,
+    var like: String?,
+    var dislike: String?,
+    var rating: Double,
+    var ratingColor: String,
     @Embedded
-    val venueStruct: VenueStruct
+    var venueStruct: VenueStruct?
 )
