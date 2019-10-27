@@ -1,6 +1,5 @@
 package test.foursquare.app.ui.venueDetail
 
-import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -17,7 +16,6 @@ import org.kodein.di.android.kodein
 import org.kodein.di.generic.instance
 import test.foursquare.app.R
 import test.foursquare.app.databinding.ActivityVenueDetailBinding
-import test.foursquare.app.model.structures.VenueDetailStruct
 import test.foursquare.app.model.structures.VenueStruct
 import test.foursquare.app.utilities.Consts
 import test.foursquare.app.utilities.Coroutines
@@ -64,7 +62,7 @@ class VenueDetailActivity : AppCompatActivity(), KodeinAware {
             })
         }
 
-
+        back.setOnClickListener { finish() }
     }
 
     private fun showProgressLayout() {

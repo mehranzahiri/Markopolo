@@ -14,7 +14,6 @@ import test.foursquare.app.R
 import test.foursquare.app.model.structures.VenueStruct
 import test.foursquare.app.ui.venueDetail.VenueDetailActivity
 import test.foursquare.app.utilities.Consts
-import kotlin.random.Random
 
 class VenueAdapter(
     private val activity: Activity
@@ -36,10 +35,11 @@ class VenueAdapter(
 
     //     notify multi item added by position
     fun restoreItems(items: List<VenueStruct>, position: Int) {
-
-        venueList.clear()
-        venueList.addAll(position, items)
-        notifyDataSetChanged()
+        try {
+            venueList.clear()
+            venueList.addAll(position, items)
+            notifyDataSetChanged()
+        } catch (e: Exception) {}
 
 
     }

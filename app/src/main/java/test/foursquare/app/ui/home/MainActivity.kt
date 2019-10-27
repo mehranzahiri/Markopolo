@@ -3,6 +3,7 @@ package test.foursquare.app.ui.home
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -53,6 +54,9 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        if (!ConnectionUtil.isOnline(this))
+            Toast.makeText(this, R.string.error_in_internet_connection, Toast.LENGTH_LONG).show()
+
         AdapterUtils.initialRecVertically(
             rec_venues,
             adapter,
@@ -62,7 +66,6 @@ class MainActivity : AppCompatActivity(), KodeinAware {
             RecyclerView.VERTICAL,
             ContextCompat.getDrawable(this, R.drawable.shape_line)
         ).addEnterAnimation(rec_venues)
-
 
 
         viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
@@ -78,9 +81,9 @@ class MainActivity : AppCompatActivity(), KodeinAware {
 
         viewModel.getVenueRecommendedList().observe(this, Observer { venueList ->
             Coroutines.main {
-                lazy_load_progressview.visibility=View.VISIBLE
+                lazy_load_progressview.visibility = View.VISIBLE
                 adapter.restoreItems(venueList, 0)
-                lazy_load_progressview.visibility=View.GONE
+                lazy_load_progressview.visibility = View.GONE
             }
 
         })

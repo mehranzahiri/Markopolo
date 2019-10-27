@@ -18,6 +18,8 @@
         app:cardBackgroundColor="@color/colorPrimaryDark"
         tools:context=".ui.venueDetail.VenueDetailActivity">
 
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/ly_detail_venue"
             android:layout_width="match_parent"
@@ -164,6 +166,15 @@
                 app:layout_constraintHorizontal_bias="0.591"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_back"
+            android:layout_alignParentTop="true"
+            android:layout_margin="8dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/back"/>
 
         <include layout="@layout/progress_view" />
 
