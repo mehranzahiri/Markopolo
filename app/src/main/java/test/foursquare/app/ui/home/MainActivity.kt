@@ -2,6 +2,7 @@ package test.foursquare.app.ui.home
 
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -26,9 +27,6 @@ class MainActivity : AppCompatActivity(), KodeinAware {
     private val LIMIT_FETCH = 50
     private val adapter: VenueAdapter by lazy {
         VenueAdapter(this)
-    }
-    private val waitProgressBar: WaitProgressBar by lazy {
-        WaitProgressBar.getInstance(this)
     }
 
     private val gpsObserver = Observer<GpsStatus> { status ->
@@ -63,26 +61,26 @@ class MainActivity : AppCompatActivity(), KodeinAware {
             rec_venues,
             RecyclerView.VERTICAL,
             ContextCompat.getDrawable(this, R.drawable.shape_line)
-        )
-            .addEnterAnimation(rec_venues)
+        ).addEnterAnimation(rec_venues)
 
 
 
         viewModel = ViewModelProviders.of(this, factory).get(HomeViewModel::class.java)
 
-        viewModel.fetchCurrentLocation().observe(this, Observer { location ->
+        viewModel.fetchCurrentLocation()?.observe(this, Observer { location ->
 
             Coroutines.main {
-                viewModel.fetchRecommendedVenue(location!!, LIMIT_FETCH, 0)
+                if (location != null)
+                    viewModel.fetchRecommendedVenue(location, LIMIT_FETCH, 0)
             }
 
         })
 
         viewModel.getVenueRecommendedList().observe(this, Observer { venueList ->
             Coroutines.main {
-                waitProgressBar.showLazyLoadProgressview()
+                lazy_load_progressview.visibility=View.VISIBLE
                 adapter.restoreItems(venueList, 0)
-                waitProgressBar.hideLazyLoadProgressview()
+                lazy_load_progressview.visibility=View.GONE
             }
 
         })
@@ -102,7 +100,7 @@ class MainActivity : AppCompatActivity(), KodeinAware {
         when (requestCode) {
             Consts.PERMISSIONS_REQUEST_LOCATION -> {
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    viewModel.startTracker()
+                    recreate()
                 }
             }
         }

@@ -2,6 +2,7 @@ package test.foursquare.app.ui.home
 
 import android.Manifest
 import android.location.Location
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import test.foursquare.app.model.LocationTrackingRepository
 import test.foursquare.app.model.VenueRepository
@@ -32,5 +33,6 @@ class HomeViewModel(
 
     fun getCategoryRecommendedList(id: String) = venueRepository.getCategoryRecommendedList(id)
 
-    fun fetchCurrentLocation() = locationTrackingRepository.currentLocation
+    fun fetchCurrentLocation(): LiveData<Location>? = locationTrackingRepository.currentLocation
+
 }

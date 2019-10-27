@@ -25,5 +25,6 @@ data class VenueStruct(
     var address: String,
     var distance: Int,
     @Embedded
-    var categoryStruct: CategoryStruct?
+    var categoryStruct: CategoryStruct?,
+    var created_at: Long
 )

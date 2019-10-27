@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:maxWidth="350dp"
                 android:padding="8dp"
+                android:maxLines="3"
                 android:text="@={venueDetailStruct.venueStruct.name}"
                 android:textColor="@color/colorPrimary"
                 android:textSize="22sp"

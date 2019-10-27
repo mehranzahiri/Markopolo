@@ -4,7 +4,7 @@ object Consts {
 
     const val PERMISSIONS_REQUEST_LOCATION = 1001
     const val PHOTO_DETAIL_SIZE_VALUE = "500x500"
-    const val VARIANCE_VALUE = 1F
+    const val VARIANCE_VALUE = 10F
     const val LAST_LOCATION_KEY = "last_access_location"
     /** keys **/
     const val CLIENT_ID_KEY = "client_id"
@@ -15,8 +15,8 @@ object Consts {
     const val VENUE_SERIALIZE_KEY: String = "VENUE_ID"
     /** values  **/
     const val BASE_URL_VALUE = "https://api.foursquare.com/v2/"
-    const val CLIENT_ID_VALUE = "IEQ2P3FSYVTI00ANIVO51YBP0WH4OW43VGPW1E4CSUASLQXC"
-    const val CLIENT_SECRET_VALUE = "2YY1ONJQ0G1X40GQY34Q4J1YMXDLGHB3Y1ULKJW51N3BS13F"
+    const val CLIENT_ID_VALUE = "0HKBOGVF4IMIIM4S2G3SZYSFTBZIPBEXNBBLUQCXQFOWZ0A0"
+    const val CLIENT_SECRET_VALUE = "2W3S4XQT0SR1U3JETEUMFKWAMHPVPUNEXUALB0GU4SWHFFYM"
     const val VERSION_VALUE = "20190425"
     const val CATEGORY_ICON_SIZE = 64
 

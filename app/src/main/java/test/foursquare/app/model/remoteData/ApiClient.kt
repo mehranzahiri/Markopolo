@@ -23,6 +23,7 @@ class ApiClient {
         val okHttpClient = OkHttpClient.Builder().readTimeout(15, TimeUnit.SECONDS)
             .writeTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
+            .addInterceptor(NetworkConnectionInterceptor())
             .addInterceptor { chain ->
                 var request: Request = chain.request()
 

@@ -1,6 +1,5 @@
 package test.foursquare.app.model.services
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.location.Location
 import androidx.lifecycle.LiveData
@@ -25,13 +24,12 @@ class LocationTracker(context: Context) : LiveData<Location>() {
 
     private fun createLocationRequest() {
         mLocationRequest = LocationRequest().apply {
-            interval = 10000
-            fastestInterval = 5000
+            interval = 60 * 1000
+            fastestInterval = 45 * 1000
             priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         }
     }
 
-    @SuppressLint("MissingPermission")
     override fun onActive() {
         super.onActive()
         mFusedLocationClient?.requestLocationUpdates(mLocationRequest, mLocationCallback, null)

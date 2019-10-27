@@ -19,6 +19,7 @@ import test.foursquare.app.model.structures.VenueDetailStruct
 import test.foursquare.app.model.structures.VenueStruct
 import test.foursquare.app.utilities.Consts
 import test.foursquare.app.utilities.Coroutines
+import java.io.IOException
 
 class VenueRepository(
     private val sharedPrefProvider: SharedPrefProvider,
@@ -50,23 +51,30 @@ class VenueRepository(
     suspend fun fetchRecommendedVenue(latLng: Location, limit: Int, offset: Int) {
 
         if (isFetchNeeded(latLng, Consts.VARIANCE_VALUE))
-            parseVenueListFromResponse(
-                requests.fetchVenues(
-                    locationToString(latLng),
-                    limit,
-                    offset
-                ).body()
-            )
+            try {
+                parseVenueListFromResponse(
+                    requests.fetchVenues(
+                        locationToString(latLng),
+                        limit,
+                        offset
+                    ).body()
+                )
+            } catch (e: IOException) {
+            }
+
 
     }
 
-    suspend fun fetchVenueDetail(id: String): LiveData<VenueDetailStruct> {
+    suspend fun fetchVenueDetail(id: String): LiveData<VenueDetailStruct>? {
         return withContext(Dispatchers.IO) {
-            parseVenueDetailFromResponse(
-                requests.fetchVenueDetail(
-                    "venues/$id"
-                ).body()
-            )
+            try {
+                parseVenueDetailFromResponse(
+                    requests.fetchVenueDetail(
+                        "venues/$id"
+                    ).body()
+                )
+            } catch (e: IOException) {
+            }
 
             getVenueDetailRecommendedList(id)
         }
@@ -164,7 +172,8 @@ class VenueRepository(
                         venueItem.getJSONObject("location").getDouble("lng"),
                         venueItem.getJSONObject("location").getString("address"),
                         venueItem.getJSONObject("location").getInt("distance"),
-                        null
+                        null,
+                        System.currentTimeMillis()
                     )
                 )
 

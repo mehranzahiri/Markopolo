@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_avenue.view.*
 import test.foursquare.app.R
 import test.foursquare.app.model.structures.VenueStruct
 import test.foursquare.app.ui.venueDetail.VenueDetailActivity
 import test.foursquare.app.utilities.Consts
+import kotlin.random.Random
 
 class VenueAdapter(
     private val activity: Activity
@@ -36,9 +38,7 @@ class VenueAdapter(
     fun restoreItems(items: List<VenueStruct>, position: Int) {
 
         venueList.clear()
-        notifyDataSetChanged()
-
-        venueList.addAll(0, items)
+        venueList.addAll(position, items)
         notifyDataSetChanged()
 
 
@@ -67,7 +67,8 @@ class VenueAdapter(
             itemView.txt_category.text = venueStruct.categoryStruct?.cat_name
             itemView.txt_distance.text = venueStruct.distance.toString().plus(" m")
             Glide.with(itemView.context)
-                .load(venueStruct.categoryStruct?.icon)
+                .load("https://picsum.photos/id/".plus((1 until 500).random()).plus("/300/300"))
+                .transition(DrawableTransitionOptions.withCrossFade())
                 .thumbnail(Glide.with(itemView.context).load(R.drawable.gif_placeholder))
                 .into(itemView.img_place)
             itemView.ly_venue.setOnClickListener {

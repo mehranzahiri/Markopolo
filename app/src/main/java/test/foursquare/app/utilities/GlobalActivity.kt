@@ -42,7 +42,7 @@ class GlobalActivity : Application(), KodeinAware {
 //        utils
         bind() from singleton { SharedPrefProvider() }
         bind() from singleton { VenueDatabse(instance()) }
-        bind() from singleton { LocationTracker(instance()) }
+        bind() from provider { LocationTracker(instance()) }
 
 //        repositories
         bind() from singleton { GeneralRepository(instance()) }
