@@ -4,6 +4,7 @@ import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
+import retrofit2.http.Url
 import test.foursquare.app.utilities.Consts
 
 
@@ -19,5 +20,10 @@ interface ApiInterface {
         @Query("ll") latLng: String,
         @Query("limit") limit: Int,
         @Query("offset") offset: Int
+    ): Response<ResponseBody>
+
+    @GET
+    suspend fun getVenueDetial(
+        @Url url: String
     ): Response<ResponseBody>
 }

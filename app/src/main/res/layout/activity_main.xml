@@ -13,6 +13,18 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_avenue"/>
+        tools:listitem="@layout/item_avenue" />
+
+    <ProgressBar
+        android:id="@+id/lazy_load_progressview"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="402dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:indeterminate="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -11,8 +11,8 @@ import test.foursquare.app.model.structures.VenueDetailStruct
 interface VenueDetailDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun saveAllVenueDetails(venueDetailEntity: List<VenueDetailStruct>)
+    fun saveVenueDetails(venueDetailEntity: VenueDetailStruct)
 
-    @Query("SELECT * FROM venueDetails")
-    fun getVenueDetails(): LiveData<List<VenueDetailStruct>>
+    @Query("SELECT * FROM venueDetails WHERE venue_id = :id")
+    fun getVenueDetail(id: String): LiveData<VenueDetailStruct>
 }

@@ -17,14 +17,14 @@ import androidx.room.PrimaryKey
 )
 data class VenueStruct(
     @PrimaryKey(autoGenerate = false)
-    val id: String,
-    val name: String,
-    val category_id: String,
-    val photo: String?,
-    val lat: Double,
-    val lng: Double,
-    val address: String,
-    val distance: Int,
+    var id: String,
+    var name: String,
+    var category_id: String,
+    var lat: Double,
+    var lng: Double,
+    var address: String,
+    var distance: Int,
     @Embedded
-    val categoryStruct: CategoryStruct?
+    var categoryStruct: CategoryStruct?,
+    var created_at: Long
 )
