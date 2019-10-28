@@ -16,6 +16,7 @@
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
         app:cardBackgroundColor="@color/colorPrimaryDark"
+        android:layoutDirection="ltr"
         tools:context=".ui.venueDetail.VenueDetailActivity">
 
 
@@ -103,17 +104,17 @@
                 android:id="@+id/txt_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
                 android:padding="16dp"
-                tools:text="Address: Planting"
+                android:singleLine="true"
                 android:text="@{`Address: `+venueDetailStruct.venueStruct.address}"
                 android:textColor="@color/transparent50_white"
                 android:textSize="12sp"
-                android:singleLine="true"
-                android:ellipsize="end"
                 android:textStyle="bold"
-                android:gravity="center"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Address: Planting" />
 
             <TextView
                 android:id="@+id/txt_hour"
@@ -139,14 +140,14 @@
                 android:drawableLeft="@drawable/ic_like"
                 android:gravity="center"
                 android:padding="4dp"
-                tools:text="42"
                 android:text="@={venueDetailStruct.like}"
                 android:textColor="@color/transparent70_white"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txt_dislike" />
+                app:layout_constraintTop_toTopOf="@+id/txt_dislike"
+                tools:text="42" />
 
             <TextView
                 android:id="@+id/txt_dislike"
@@ -154,17 +155,16 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/shape_round_corner"
                 android:drawableRight="@drawable/ic_dislike"
-                android:padding="4dp"
-                tools:text="19"
                 android:gravity="center"
+                android:padding="4dp"
                 android:text="@={venueDetailStruct.dislike}"
                 android:textColor="@color/transparent70_white"
                 android:textSize="32sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/txt_like"
-                app:layout_constraintHorizontal_bias="0.591"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="19" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
